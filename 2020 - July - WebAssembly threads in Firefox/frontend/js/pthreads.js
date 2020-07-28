@@ -30,7 +30,7 @@ function renderOriginalImage(url) {
 
     // Grab the image data from the canvas, have the data modified by the
     // JavaScript code and WebAssembly module, and then render the modified
-    // images.
+    // images. Note that adjustImageJS and adjustImageWasm are async.
     const originalImageData = originalContext.getImageData(0, 0, width, height);
     adjustImageJS(originalImageData, width, height, "nonThreadedJSCanvas");
     adjustImageWasm(originalImageData, width, height, "nonThreadedWasmCanvas");
@@ -40,7 +40,7 @@ function renderOriginalImage(url) {
 }
 
 
-function adjustImageJS(imageData, width, height, destinationCanvasId) {
+async function adjustImageJS(imageData, width, height, destinationCanvasId) {
   // Get a copy of the imageData and the number of bytes it contains.
   const imageDataBytes = Uint8ClampedArray.from(imageData.data);
   const bufferSize = imageDataBytes.byteLength;
@@ -94,7 +94,7 @@ function renderModifiedImage(canvasId, byteArray, width, height, duration) {
 }
 
 
-function adjustImageWasm(imageData, width, height, destinationCanvasId) {
+async function adjustImageWasm(imageData, width, height, destinationCanvasId) {
   // Get the number of bytes in the ImageData's Uint8ClampedArray and then 
   // reserve space in the module's memory for the image data. Copy the data in.
   const bufferSize = imageData.data.byteLength;
