@@ -4,6 +4,6 @@
 
   This repository holds the code for the following article that walks you through returning the response headers, including the crossorigin attribute, and using WebAssembly threads to convert a user-supplied image to greyscale: [https://cggallant.blogspot.com/2020/07/webassembly-threads-in-firefox.html](https://cggallant.blogspot.com/2020/07/webassembly-threads-in-firefox.html)
 
-  At the moment, this is Firefox specific but will soon be a requirement for all browsers that support WebAssembly threads including Chrome for Android _(August 2020)_, Firefox for Android _(soon)_, and Chrome desktop _(March 2021)_.
+  At the moment, this is Firefox specific but will soon be a requirement for all browsers that support WebAssembly threads including Chrome for Android _(November 2020)_, Firefox for Android _(soon)_, and Chrome desktop _(March 2021)_.
 
  
