@@ -1,3 +1,19 @@
+// Copied the Module object from an HTML Template Emscripten generated and then
+// adjusted the print and printErr function for use here.
+var Module = {
+  print: (function() {
+    return function(text) {
+      if (arguments.length > 1) { text = Array.prototype.slice.call(arguments).join(' '); }
+      appendToLog(text);
+    };
+  })(),
+  printErr: function(text) {
+    if (arguments.length > 1) { text = Array.prototype.slice.call(arguments).join(' '); }
+    appendToLog(text);
+  }
+}
+
+
 function initializePage() {
   $("#fileUpload").on("change", processImageFile);
 }
@@ -5,6 +21,9 @@ function initializePage() {
 
 // Called when the user selects a file to upload
 function processImageFile(e) {
+  // Reset the output text area
+  clearLog();
+
   // Read in the file
   const reader = new FileReader();
   reader.onload = e => {
@@ -80,7 +99,7 @@ async function adjustImageJS(imageData, sizeDetails, destinationCanvasId) {
   const Start = new Date();
   adjustPixels(imageDataBytes, 0, bufferSize);
   const duration = (new Date() - Start);
-  console.log(`JavaScript version took ${duration} milliseconds to execute.`); 
+  appendToLog(`JavaScript version took ${duration} milliseconds to execute.`); 
 
   // Have the modified image displayed
   renderModifiedImage(destinationCanvasId, imageDataBytes, sizeDetails,
@@ -164,4 +183,16 @@ async function adjustImageWasm(imageData, sizeDetails, destinationCanvasId) {
   // Have the modified image displayed
   renderModifiedImage(destinationCanvasId, byteCopy, sizeDetails, 
     Module._GetDuration());
+}
+
+
+function clearLog() { $("#messageLog").text(""); }
+
+function appendToLog(message) {
+  const $messageLog = $("#messageLog");
+  const existingContent = $messageLog.text();
+  $messageLog.text(`${existingContent}• ${message}\n`); 
+
+  // Send the message to the console window too
+  console.log(message);
 }
