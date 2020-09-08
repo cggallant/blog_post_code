@@ -1,0 +1,6 @@
+/.vs
+/bin
+/node_modules/
+/obj
+/dist
+/public
