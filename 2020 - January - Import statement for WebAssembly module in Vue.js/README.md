@@ -1,0 +1,2 @@
+This repository contains the source code for the following article where I look into two ways that you can load an Emscripten-generated WebAssembly module into Vue.js using the Import statement:
+[https://cggallant.blogspot.com/2020/01/the-import-statement-with-emscripten.html](https://cggallant.blogspot.com/2020/01/the-import-statement-with-emscripten.html)

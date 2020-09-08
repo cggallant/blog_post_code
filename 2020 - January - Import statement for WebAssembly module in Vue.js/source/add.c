@@ -1,8 +1,5 @@
 #include <stdlib.h>
-
-#ifdef __EMSCRIPTEN__
-  #include <emscripten.h>
-#endif
+#include <emscripten.h>
 
 EMSCRIPTEN_KEEPALIVE
 int Add(int value1, int value2) 
