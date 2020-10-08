@@ -1,6 +1,6 @@
 # 2020 - October - Blazor WebAssembly and the Dovico Time Entry Status app
   
-  <img src="https://1.bp.blogspot.com/-8cXpMqDHpR8/X33BYgdJUwI/AAAAAAAALZ4/hrMYW0nxDVMPcwiQ_x4dmWntiUNq9Im1wCLcBGAsYHQ/w640-h408/1%2B-%2BScreenShotOfTheBlazorApp.png" width="350" align="right" />
+  <img src="https://1.bp.blogspot.com/-8cXpMqDHpR8/X33BYgdJUwI/AAAAAAAALZ4/hrMYW0nxDVMPcwiQ_x4dmWntiUNq9Im1wCLcBGAsYHQ/w640-h408/1%2B-%2BScreenShotOfTheBlazorApp.png" width="450" align="right" />
 
   Over the past few weeks, I've been digging into WebAssembly from a C# perspective for an article that I'm writing. Although I've been following a number of WebAssembly related C# technologies like mono, the Uno Platform, and Blazor, I felt that I'd get more out of my learning by building something.
 
