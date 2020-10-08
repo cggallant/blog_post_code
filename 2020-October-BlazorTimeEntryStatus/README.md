@@ -6,4 +6,4 @@
 
   Fortunately, Dovico recently gave me some spare time to research into anything that interested me, so I decided to use that time to dig into Blazor by rewriting a small Java application that I built in 2011.
 
-  This repository holds the code for the following article that walks you through creating the Dovico Time Entry Status app using Blazor WebAssembly: []()
+  This repository holds the code for the following article that walks you through creating the Dovico Time Entry Status app using Blazor WebAssembly: [https://cggallant.blogspot.com/2020/10/blazor-webassembly-and-dovico-time.html](https://cggallant.blogspot.com/2020/10/blazor-webassembly-and-dovico-time.html)
