@@ -1,0 +1,64 @@
+﻿@page "/"
+@using System.Runtime.Intrinsics;
+@using System.Diagnostics;
+@using System.Runtime.InteropServices;
+
+<button class="btn btn-primary" @onclick="runTest">Run the Calculations</button>
+
+<p style="font-weight:bold;margin:10px 0 0 0;">Normal duration:</p>
+<p>@_durationNormal</p>
+
+<p style="font-weight:bold;margin:10px 0 0 0;">SIMD duration:</p>
+<p>@_durationSIMD</p>
+
+
+@code {
+    private string _durationNormal = "";
+    private string _durationSIMD = "";
+ 
+    private int[]? _data;
+    private int _dataCount = 5_000_000;
+
+    private void runTest()
+    {
+        Random rng = new Random();
+        _data = new int[_dataCount];
+        for (int i = 0; i < _dataCount; i++) { _data[i] = rng.Next(1, 5); }
+
+        runTestNormal();
+        runTestSIMD();
+    }
+    public void runTestNormal()
+    {
+        Stopwatch sw = new Stopwatch();
+        sw.Start();
+
+        int result = 0;
+        for (int i = 0; i < _dataCount; i++) { result += _data![i]; }
+
+        sw.Stop();
+        _durationNormal = $"{sw.ElapsedMilliseconds:n0}ms. Calculated result: {result:n0}";
+    }
+
+    private void runTestSIMD()
+    {
+        Stopwatch sw = new Stopwatch();
+        sw.Start();
+
+        // Convert the array into span and then loop through the span's items
+        Vector128<int> vectorResult = Vector128<int>.Zero;
+        ReadOnlySpan<Vector128<int>> spanValues = MemoryMarshal.Cast<int, Vector128<int>>(_data);
+        for (int i = 0; i < spanValues.Length; i++)
+        {
+            vectorResult = Vector128.Add<int>(vectorResult, spanValues[i]);
+        }
+
+        // vectorResult holds the sum of each group (lane). Now we need to sum up the groups
+        int lanes = Vector128<int>.Count;
+        int result = 0;
+        for (int i = 0; i < lanes; i++) { result += vectorResult.GetElement(i); }
+
+        sw.Stop();
+        _durationSIMD = $"{sw.ElapsedMilliseconds:n0}ms. Calculated result: {result:n0}";
+    }
+}
